@@ -57,7 +57,7 @@ for epoch in range(3):
         # [b,1,28,28]=>[b,784]
         x = x.view(x.size(0),28*28)
         # =>[b,10]
-        out = model(x)
+        out = net(x)
         # [b,10]
         y_onehot = one_hot(y)
         # loss = mse(out,y_onehot)
@@ -76,3 +76,21 @@ for epoch in range(3):
 
 # we get optimal params in net
 plot_curve(train_loss)
+
+total_correct = 0
+for x,y in test_loader:
+    x= x.view(x.size(0),28*28)
+    out = net(x)
+    # out: [b,10] => pred: [b]
+    pred = out.argmax(dim=1)
+    correct = pred.eq(y).sum().float().item()
+    total_correct += correct
+
+total_num = len(test_loader.dataset)
+acc = total_correct / total_num
+print('test acc:',acc)
+
+x,y = next(iter(test_loader))
+out = net(x.view(x.size(0),28*28))
+pred = out.argmax(dim=1)
+plot_image(x,pred,'test')
