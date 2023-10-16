@@ -48,6 +48,7 @@ class Net(nn.Module):
 
         return x
 
+train_loss = []
 net=Net()
 optimizer = optim.SGD(net.parameters(),lr=0.01,momentum=0.9)
 for epoch in range(3):
@@ -68,8 +69,10 @@ for epoch in range(3):
         # w' = w - lr*grad
         optimizer.step()
 
+        train_loss.append(loss.item())
+
         if batch_idx % 10 == 0:
             print(epoch,batch_idx,loss.item())
 
 # we get optimal params in net
-
+plot_curve(train_loss)
