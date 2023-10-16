@@ -1,2 +1,3 @@
-data/
+ResNet_CIFAR10/data/
 *.pth
+RNN_LSTM/.word_vectors_cache/
