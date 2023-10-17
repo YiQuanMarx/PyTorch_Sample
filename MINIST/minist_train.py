@@ -8,6 +8,8 @@ from matplotlib import pyplot as plt
 
 from utils import plot_image,plot_curve,one_hot
 
+def plot_image(x,):
+
 # load dataset
 train_loader = torch.utils.data.DataLoader(
     torchvision.datasets.MNIST('mnist_data',train=True,download=True,
